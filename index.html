@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>むすひ | heart healing studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+  <style>
+    :root{--deep:#3A2245;--purple:#6B4E82;--mauve:#A67FA0;--pink:#DEB8D0;--blush:#F2E0EC;--cream:#FDF6FA;--gold:#E8C060;--amber:#F5E0A0;--rose:#C04870;--white:#FEFCFE;}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:'Noto Serif JP',serif;background:var(--cream);color:var(--deep);overflow-x:hidden}
+    nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(253,246,250,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(222,184,208,.22)}
+    .nav-logo{font-family:'Zen Antique Soft',serif;font-size:1rem;letter-spacing:.22em;color:var(--purple)}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-size:.78rem;letter-spacing:.14em;color:var(--mauve);text-decoration:none;transition:color .3s}
+    .nav-links a:hover{color:var(--rose)}
+    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;padding:8rem 2rem 5rem;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 55% at 50% 25%,rgba(240,210,160,.28) 0%,transparent 70%),radial-gradient(ellipse 80% 60% at 30% 60%,rgba(212,160,188,.35) 0%,transparent 60%),radial-gradient(ellipse 60% 70% at 75% 50%,rgba(92,61,110,.2) 0%,transparent 65%),linear-gradient(160deg,#EDD5E4 0%,#FAF4F7 40%,#EDE0F0 100%)}
+    .petal-light{position:absolute;z-index:1;border-radius:50% 20% 50% 20%;opacity:.18;animation:petalFloat 10s ease-in-out infinite alternate}
+    .petal-1{width:320px;height:320px;top:8%;left:5%;background:radial-gradient(circle,var(--amber) 0%,transparent 70%);animation-duration:11s}
+    .petal-2{width:240px;height:260px;top:20%;right:8%;border-radius:20% 50% 20% 50%;background:radial-gradient(circle,var(--pink) 0%,transparent 70%);animation-duration:14s;animation-delay:-3s}
+    .petal-3{width:180px;height:200px;bottom:15%;left:20%;background:radial-gradient(circle,#D87890 0%,transparent 70%);animation-duration:9s;animation-delay:-6s}
+    @keyframes petalFloat{from{transform:translate(0,0) rotate(0deg) scale(1)}to{transform:translate(15px,-20px) rotate(8deg) scale(1.08)}}
+    .fol-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);z-index:1;pointer-events:none;width:min(580px,90vw);height:min(580px,90vw)}
+    .fol-outer{animation:slowSpin 80s linear infinite}
+    @keyframes slowSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    .fol-core{animation:folPulse 8s ease-in-out infinite alternate}
+    @keyframes folPulse{from{opacity:.65;transform:scale(.97)}to{opacity:1;transform:scale(1.03)}}
+    .hero-content{position:relative;z-index:2}
+    .hero-kana{font-family:'Zen Antique Soft',serif;font-size:clamp(4rem,14vw,8rem);color:var(--purple);letter-spacing:.3em;opacity:0;animation:fadeUp 1.4s ease forwards .4s;line-height:1;text-shadow:0 2px 40px rgba(232,192,96,.4),0 0 80px rgba(180,130,200,.2)}
+    .hero-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,3vw,1.5rem);color:var(--mauve);letter-spacing:.38em;margin-top:.8rem;opacity:0;animation:fadeUp 1.4s ease forwards .8s}
+    .sacred-divider{display:block;margin:1.8rem auto;opacity:0;animation:fadeUp 1.4s ease forwards 1.1s}
+    .hero-tagline{font-size:clamp(.82rem,2vw,.98rem);color:var(--purple);letter-spacing:.1em;line-height:2.6;font-weight:200;opacity:0;animation:fadeUp 1.4s ease forwards 1.3s}
+    .hero-cta{display:inline-block;margin-top:2.8rem;padding:1rem 3rem;background:linear-gradient(135deg,rgba(192,72,112,.88),rgba(107,78,130,.88));color:var(--white);font-size:.78rem;letter-spacing:.24em;text-decoration:none;border-radius:60px;box-shadow:0 6px 30px rgba(192,72,112,.28);transition:all .4s;opacity:0;animation:fadeUp 1.4s ease forwards 1.7s}
+    .hero-cta:hover{transform:translateY(-3px)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    .section-wrap{padding:6rem 2rem;max-width:880px;margin:0 auto}
+    .section-label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.75rem;letter-spacing:.4em;color:var(--gold);display:block;margin-bottom:.8rem}
+    .section-title{font-family:'Zen Antique Soft',serif;font-size:clamp(1.4rem,4vw,2rem);color:var(--purple);letter-spacing:.15em;line-height:1.6;margin-bottom:2.5rem}
+    p{font-size:.91rem;line-height:2.5;color:var(--purple);font-weight:300;letter-spacing:.04em}
+    .news-list{margin-top:1rem}
+    .news-item{display:flex;gap:2rem;padding:1.6rem 0;border-bottom:1px solid rgba(222,184,208,.28)}
+    .news-item:first-child{border-top:1px solid rgba(222,184,208,.28)}
+    .news-date{font-family:'Cormorant Garamond',serif;font-size:.8rem;color:var(--gold);letter-spacing:.1em;white-space:nowrap;padding-top:.25rem;min-width:64px}
+    .news-body{flex:1}
+    .news-title{font-size:.88rem;color:var(--purple);letter-spacing:.05em;margin-bottom:.5rem;font-weight:400;line-height:1.8}
+    .news-text{font-size:.8rem;color:var(--mauve);line-height:2;font-weight:300}
+    .about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3.5rem;align-items:start;margin-top:1rem}
+    @media(max-width:640px){.about-grid{grid-template-columns:1fr}.nav-links{display:none}}
+    .about-frame{position:relative}
+    .about-frame::before{content:'';position:absolute;inset:-12px;border:1px solid rgba(232,192,96,.35)}
+    .about-frame::after{content:'';position:absolute;inset:-24px;border:1px dashed rgba(222,184,208,.28)}
+    .about-image-box{aspect-ratio:3/4;background:linear-gradient(150deg,var(--blush) 0%,#A67FA0 55%,#3A1A48 100%);position:relative;overflow:hidden;display:block}
+    .about-image-box svg{position:absolute;inset:0;width:100%;height:100%}
+    .bulb-glow{animation:bulbBreath 6s ease-in-out infinite alternate}
+    @keyframes bulbBreath{from{opacity:.55}to{opacity:.85}}
+    .services-bg{background:linear-gradient(168deg,#F0E0EE 0%,#EDD8F0 50%,#E8D0EA 100%);padding:6rem 2rem;position:relative;overflow:hidden}
+    .services-bg::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(245,224,160,.28) 0%,transparent 65%);pointer-events:none}
+    .services-inner{max-width:880px;margin:0 auto;position:relative}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.8rem;margin-top:2.5rem}
+    .card{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border-radius:50%;padding:3.2rem 1.8rem 2.8rem;text-align:center;position:relative;overflow:hidden;transition:transform .5s ease,box-shadow .5s ease;box-shadow:0 4px 28px rgba(180,130,190,.14);aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 16px 50px rgba(180,130,190,.24)}
+    .card-ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(232,192,96,.35);pointer-events:none}
+    .card-ring-2{position:absolute;inset:8px;border-radius:50%;border:1px dashed rgba(222,184,208,.4);animation:ringSpin 30s linear infinite}
+    @keyframes ringSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    .card-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:160px;height:160px;background:radial-gradient(circle,rgba(245,220,140,.45) 0%,transparent 70%);pointer-events:none}
+    .card-icon{font-size:1.6rem;margin-bottom:.8rem;display:block;position:relative;z-index:1}
+    .card-title{font-family:'Zen Antique Soft',serif;font-size:.92rem;color:var(--purple);letter-spacing:.1em;margin-bottom:1rem;line-height:1.7;position:relative;z-index:1}
+    .card p{font-size:.75rem;line-height:2.2;color:var(--mauve);position:relative;z-index:1}
+    .card-price{margin-top:1.4rem;font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--rose);letter-spacing:.12em;position:relative;z-index:1}
+    .card-hint{font-size:.68rem;letter-spacing:.12em;color:var(--mauve);margin-top:.8rem;position:relative;z-index:1;transition:color .3s}
+    .card-accordion{cursor:pointer;border-radius:50%;transition:transform .4s,box-shadow .4s,border-radius .5s}
+    .card-accordion.open{border-radius:16px;aspect-ratio:unset;padding:2rem 1.8rem 1.6rem}
+    .card-accordion.open .card-hint{color:var(--rose)}
+    .card-wrap{display:flex;flex-direction:column}
+    .card-detail{max-height:0;overflow:hidden;transition:max-height .6s ease,opacity .4s ease,padding .4s ease;opacity:0;padding:0 1.5rem;background:rgba(255,255,255,.65);backdrop-filter:blur(8px);border-radius:0 0 16px 16px;border:1px solid rgba(232,192,96,.18);border-top:none}
+    .card-detail.open{max-height:800px;opacity:1;padding:1.8rem 1.5rem}
+    .card-detail p{font-size:.82rem;line-height:2.3;color:var(--purple)}
+    .detail-price{margin:1.4rem 0 1rem;display:flex;flex-direction:column;gap:.4rem}
+    .detail-price span{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--rose);letter-spacing:.08em}
+    .detail-btn{display:inline-block;margin-top:.5rem;padding:.75rem 1.8rem;background:linear-gradient(135deg,var(--rose),var(--purple));color:var(--white);font-size:.75rem;letter-spacing:.18em;text-decoration:none;border-radius:40px;transition:all .3s}
+    .detail-btn:hover{opacity:.85;transform:translateY(-2px)}
+    .suited-box{background:rgba(255,255,255,.45);backdrop-filter:blur(8px);border:1px solid rgba(232,192,96,.22);padding:2.2rem 2.5rem;margin:2.5rem 0;border-radius:4px}
+    .suited-title{font-family:'Zen Antique Soft',serif;font-size:.95rem;color:var(--purple);letter-spacing:.15em;margin-bottom:.5rem}
+    .suited-subtitle{font-size:.8rem;color:var(--mauve);letter-spacing:.06em;margin-bottom:1.2rem;font-weight:300}
+    .suited-list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+    .suited-list li{font-size:.84rem;color:var(--purple);font-weight:300;letter-spacing:.05em;line-height:1.8;padding-left:1.4rem;position:relative}
+    .suited-list li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:.55rem;top:.35rem}
+    .suited-note{margin-top:1.5rem;font-size:.74rem;color:var(--mauve);line-height:2;font-weight:300;border-top:1px solid rgba(222,184,208,.3);padding-top:1rem;font-style:italic}
+    .flow-box{background:rgba(255,255,255,.45);backdrop-filter:blur(8px);border:1px solid rgba(232,192,96,.22);padding:2.2rem 2.5rem;margin:2.5rem 0;border-radius:4px}
+    .flow-title{font-family:'Zen Antique Soft',serif;font-size:.95rem;color:var(--purple);letter-spacing:.15em;margin-bottom:1.4rem}
+    .flow-list{list-style:none;display:flex;flex-direction:column;gap:.9rem;counter-reset:flow}
+    .flow-list li{font-size:.84rem;color:var(--purple);font-weight:300;letter-spacing:.05em;line-height:1.8;padding-left:2rem;position:relative;counter-increment:flow}
+    .flow-list li::before{content:counter(flow);position:absolute;left:0;color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:.9rem}
+    .flow-note{margin-top:1.2rem;font-size:.74rem;color:var(--mauve);line-height:2;font-weight:300;font-style:italic}
+    .policy-box{background:rgba(255,255,255,.45);backdrop-filter:blur(8px);border:1px solid rgba(232,192,96,.22);margin:2.5rem 0;border-radius:4px;overflow:hidden}
+    .policy-accordion-btn{width:100%;background:none;border:none;padding:1.4rem 2rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Zen Antique Soft',serif;font-size:.9rem;color:var(--purple);letter-spacing:.12em;text-align:left}
+    .policy-accordion-btn:hover{background:rgba(232,192,96,.06)}
+    .policy-arrow{font-size:.7rem;color:var(--gold);transition:transform .3s}
+    .policy-accordion-btn.open .policy-arrow{transform:rotate(180deg)}
+    .policy-content{max-height:0;overflow:hidden;transition:max-height .6s ease,opacity .4s ease;opacity:0}
+    .policy-content.open{max-height:1000px;opacity:1}
+    .policy-inner{padding:0 2rem 1.8rem}
+    .policy-inner p{font-size:.8rem;line-height:2.2;color:var(--purple);font-weight:300;margin-bottom:1rem}
+    .policy-inner p:last-child{margin-bottom:0}
+    .policy-section-title{font-size:.8rem;color:var(--purple);letter-spacing:.1em;font-weight:400;margin-top:1.2rem;margin-bottom:.4rem}
+    .services-note{text-align:center;margin-top:2.5rem;font-size:.82rem;color:var(--mauve);font-weight:300;letter-spacing:.06em}
+    .confirm-notice{text-align:center;margin-top:1.5rem;font-size:.78rem;color:var(--mauve);font-weight:300;letter-spacing:.06em;line-height:2}
+    .contact-bg{background:linear-gradient(160deg,#FAF0F7 0%,#F5E8F5 50%,#EEE0F0 100%);padding:7rem 2rem;text-align:center;position:relative;overflow:hidden}
+    .contact-bg::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(245,224,160,.25) 0%,transparent 65%);pointer-events:none}
+    .contact-inner{max-width:560px;margin:0 auto;position:relative}
+    .contact-frame{position:relative;padding:3.5rem 2.5rem}
+    .corner{position:absolute;width:40px;height:40px}
+    .corner svg{width:100%;height:100%}
+    .corner-tl{top:0;left:0}.corner-tr{top:0;right:0;transform:scaleX(-1)}.corner-bl{bottom:0;left:0;transform:scaleY(-1)}.corner-br{bottom:0;right:0;transform:scale(-1)}
+    .contact-btn{display:inline-block;margin-top:2.5rem;padding:1.1rem 3.5rem;background:linear-gradient(135deg,var(--rose),var(--purple));color:var(--white);font-size:.8rem;letter-spacing:.22em;text-decoration:none;border-radius:60px;box-shadow:0 8px 36px rgba(192,72,112,.25);transition:all .4s}
+    .contact-btn:hover{transform:translateY(-3px)}
+    .note-link{display:inline-block;margin-top:1.8rem;font-size:.78rem;color:var(--mauve);letter-spacing:.2em;text-decoration:none;transition:color .3s}
+    .note-link::after{content:'';display:block;width:0;height:1px;background:var(--rose);transition:width .4s;margin-top:3px}
+    .note-link:hover{color:var(--rose)}.note-link:hover::after{width:100%}
+    footer{text-align:center;padding:2.5rem 1rem;background:var(--deep);font-size:.72rem;letter-spacing:.16em;color:rgba(222,184,208,.45)}
+    .reveal{opacity:1;transform:translateY(0);transition:opacity .95s ease,transform .95s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .profile-divider{margin:2rem 0}
+    .profile-text{margin-top:1.8rem}
+    .profile-text p{margin-bottom:1.4rem}
+  </style>
+</head>
+<body>
+<nav>
+  <span class="nav-logo">むすひ</span>
+  <ul class="nav-links">
+    <li><a href="#news">news</a></li>
+    <li><a href="#about">about</a></li>
+    <li><a href="#services">services</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="petal-light petal-1"></div>
+  <div class="petal-light petal-2"></div>
+  <div class="petal-light petal-3"></div>
+  <div class="fol-wrap">
+    <svg class="fol-outer" style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 580 580" fill="none">
+      <g opacity="0.18">
+        <line x1="290" y1="290" x2="290" y2="18"  stroke="#E8C060" stroke-width="0.7"/>
+        <line x1="290" y1="290" x2="290" y2="562" stroke="#E8C060" stroke-width="0.7"/>
+        <line x1="290" y1="290" x2="18"  y2="290" stroke="#E8C060" stroke-width="0.7"/>
+        <line x1="290" y1="290" x2="562" y2="290" stroke="#E8C060" stroke-width="0.7"/>
+        <line x1="290" y1="290" x2="99"  y2="99"  stroke="#E8C060" stroke-width="0.5"/>
+        <line x1="290" y1="290" x2="481" y2="481" stroke="#E8C060" stroke-width="0.5"/>
+        <line x1="290" y1="290" x2="481" y2="99"  stroke="#E8C060" stroke-width="0.5"/>
+        <line x1="290" y1="290" x2="99"  y2="481" stroke="#E8C060" stroke-width="0.5"/>
+        <line x1="290" y1="290" x2="46"  y2="187" stroke="#DEB8D0" stroke-width="0.4"/>
+        <line x1="290" y1="290" x2="534" y2="393" stroke="#DEB8D0" stroke-width="0.4"/>
+        <line x1="290" y1="290" x2="187" y2="46"  stroke="#DEB8D0" stroke-width="0.4"/>
+        <line x1="290" y1="290" x2="393" y2="534" stroke="#DEB8D0" stroke-width="0.4"/>
+        <line x1="290" y1="290" x2="534" y2="187" stroke="#DEB8D0" stroke-width="0.4"/>
+        <line x1="290" y1="290" x2="46"  y2="393" stroke="#DEB8D0" stroke-width="0.4"/>
+        <line x1="290" y1="290" x2="393" y2="46"  stroke="#DEB8D0" stroke-width="0.4"/>
+        <line x1="290" y1="290" x2="187" y2="534" stroke="#DEB8D0" stroke-width="0.4"/>
+      </g>
+      <circle cx="290" cy="290" r="262" stroke="#E8C060" stroke-width="0.6" opacity="0.2"/>
+      <circle cx="290" cy="290" r="246" stroke="#DEB8D0" stroke-width="0.4" opacity="0.16" stroke-dasharray="3 10"/>
+    </svg>
+    <svg class="fol-core" style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 580 580" fill="none">
+      <defs>
+        <radialGradient id="folGlow" cx="50%" cy="50%" r="35%">
+          <stop offset="0%" stop-color="#F5E8A0" stop-opacity="0.45"/>
+          <stop offset="100%" stop-color="#F5E8A0" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="290" cy="290" rx="100" ry="100" fill="url(#folGlow)"/>
+      <circle cx="290" cy="290" r="78" stroke="#E8C060" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="368" cy="290" r="78" stroke="#E8C060" stroke-width="0.65" opacity="0.4"/>
+      <circle cx="329" cy="357.6" r="78" stroke="#E8C060" stroke-width="0.65" opacity="0.4"/>
+      <circle cx="251" cy="357.6" r="78" stroke="#E8C060" stroke-width="0.65" opacity="0.4"/>
+      <circle cx="212" cy="290" r="78" stroke="#E8C060" stroke-width="0.65" opacity="0.4"/>
+      <circle cx="251" cy="222.4" r="78" stroke="#E8C060" stroke-width="0.65" opacity="0.4"/>
+      <circle cx="329" cy="222.4" r="78" stroke="#E8C060" stroke-width="0.65" opacity="0.4"/>
+      <circle cx="446" cy="290" r="78" stroke="#DEB8D0" stroke-width="0.45" opacity="0.25"/>
+      <circle cx="407" cy="357.6" r="78" stroke="#DEB8D0" stroke-width="0.45" opacity="0.25"/>
+      <circle cx="407" cy="222.4" r="78" stroke="#DEB8D0" stroke-width="0.45" opacity="0.25"/>
+      <circle cx="134" cy="290" r="78" stroke="#DEB8D0" stroke-width="0.45" opacity="0.25"/>
+      <circle cx="173" cy="357.6" r="78" stroke="#DEB8D0" stroke-width="0.45" opacity="0.25"/>
+      <circle cx="173" cy="222.4" r="78" stroke="#DEB8D0" stroke-width="0.45" opacity="0.25"/>
+      <circle cx="290" cy="290" r="154" stroke="#E8C060" stroke-width="0.55" opacity="0.22"/>
+      <circle cx="290" cy="290" r="7" fill="#E8C060" opacity="0.65"/>
+      <circle cx="290" cy="290" r="3" fill="#F5EDD0" opacity="0.9"/>
+      <circle cx="290" cy="290" r="14" fill="none" stroke="#E8C060" stroke-width="0.6" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-kana">むすひ</div>
+    <div class="hero-en">musuhi &nbsp;·&nbsp; heart healing studio</div>
+    <svg class="sacred-divider" width="260" height="30" viewBox="0 0 260 30" fill="none">
+      <path d="M10 15 Q32 5 55 15 Q78 25 100 15 Q122 5 130 15 Q138 25 160 15 Q182 5 205 15 Q228 25 250 15" stroke="#DEB8D0" stroke-width="0.8" fill="none"/>
+      <circle cx="130" cy="15" r="5" fill="none" stroke="#E8C060" stroke-width="0.8" opacity="0.9"/>
+      <circle cx="130" cy="15" r="2.5" fill="#E8C060" opacity="0.8"/>
+      <line x1="130" y1="6" x2="130" y2="10" stroke="#E8C060" stroke-width="0.7" opacity="0.7"/>
+      <line x1="130" y1="20" x2="130" y2="24" stroke="#E8C060" stroke-width="0.7" opacity="0.7"/>
+      <line x1="121" y1="15" x2="125" y2="15" stroke="#E8C060" stroke-width="0.7" opacity="0.7"/>
+      <line x1="135" y1="15" x2="139" y2="15" stroke="#E8C060" stroke-width="0.7" opacity="0.7"/>
+      <circle cx="42" cy="15" r="1.5" fill="#DEB8D0" opacity="0.6"/>
+      <circle cx="218" cy="15" r="1.5" fill="#DEB8D0" opacity="0.6"/>
+    </svg>
+    <p class="hero-tagline">静かな声に耳を澄まし、こころの地図を読む。<br>あなたの内側にある知恵と、もう一度つながるために。</p>
+    <a href="#services" class="hero-cta">セッションを見る</a>
+  </div>
+</div>
+
+<section id="news">
+  <div class="section-wrap">
+    <div class="reveal">
+      <span class="section-label">news</span>
+      <h2 class="section-title">お知らせ</h2>
+    </div>
+    <div class="news-list reveal">
+      <div class="news-item">
+        <span class="news-date">2025.01</span>
+        <div class="news-body">
+          <div class="news-title">むすひ heart healing studio を開設しました</div>
+          <p class="news-text">BodyTalkと直感的リーディングを統合したオンラインセッションを開始します。どうぞよろしくお願いいたします。</p>
+        </div>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2025.01</span>
+        <div class="news-body">
+          <div class="news-title">Noteにて記事を公開しています</div>
+          <p class="news-text">自己統合のプロセスやBodyTalkについての記事をNoteで発信しています。ぜひご覧ください。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:linear-gradient(170deg,#FAF4F8 0%,#FDF6FA 100%)">
+  <div class="section-wrap">
+    <div class="reveal">
+      <span class="section-label">about</span>
+      <h2 class="section-title">むすひについて</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-frame reveal">
+        <div class="about-image-box">
+          <svg viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="bg2" cx="50%" cy="45%" r="65%">
+                <stop offset="0%" stop-color="#EED8F0" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#C090C8" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="bulbLight" cx="140" cy="112" r="130" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFFDE0" stop-opacity="0.52"/>
+                <stop offset="30%" stop-color="#F8E890" stop-opacity="0.28"/>
+                <stop offset="65%" stop-color="#F0D060" stop-opacity="0.1"/>
+                <stop offset="100%" stop-color="#E8C060" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="lensGold2" cx="50%" cy="40%" r="58%">
+                <stop offset="0%" stop-color="#FFFBE8" stop-opacity="0.95"/>
+                <stop offset="40%" stop-color="#F8DC60" stop-opacity="0.78"/>
+                <stop offset="80%" stop-color="#E0A020" stop-opacity="0.42"/>
+                <stop offset="100%" stop-color="#C07000" stop-opacity="0.1"/>
+              </radialGradient>
+              <linearGradient id="tailGrad" x1="140" y1="268" x2="140" y2="330" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#E8C060" stop-opacity="0.75"/>
+                <stop offset="100%" stop-color="#E8C060" stop-opacity="0.1"/>
+              </linearGradient>
+              <clipPath id="lens2">
+                <path d="M 140 112.06 A 90 90 0 0 1 140 267.94 A 90 90 0 0 1 140 112.06 Z"/>
+              </clipPath>
+            </defs>
+            <rect width="280" height="380" fill="url(#bg2)"/>
+            <ellipse cx="140" cy="112" rx="130" ry="115" fill="url(#bulbLight)" class="bulb-glow"/>
+            <ellipse cx="140" cy="140" rx="80" ry="120" fill="url(#bulbLight)" class="bulb-glow" opacity="0.5"/>
+            <circle cx="95" cy="190" r="90" fill="none" stroke="rgba(200,160,230,0.75)" stroke-width="1.6"/>
+            <circle cx="185" cy="190" r="90" fill="none" stroke="rgba(200,160,230,0.75)" stroke-width="1.6"/>
+            <path d="M 140 112.06 A 90 90 0 0 1 140 267.94 A 90 90 0 0 1 140 112.06 Z" fill="url(#lensGold2)"/>
+            <path d="M 140 112.06 A 90 90 0 0 1 140 267.94 A 90 90 0 0 1 140 112.06 Z" fill="none" stroke="#E8C060" stroke-width="1.2" opacity="0.72"/>
+            <g clip-path="url(#lens2)" opacity="0.07">
+              <rect x="137" y="122" width="6" height="132" fill="white"/>
+              <rect x="83" y="165" width="114" height="6" fill="white"/>
+            </g>
+            <path d="M 140 267.94 A 90 90 0 0 1 113.7 278.0" fill="none" stroke="url(#tailGrad)" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M 140 267.94 A 90 90 0 0 0 166.3 278.0" fill="none" stroke="url(#tailGrad)" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="140" cy="112.06" r="2" fill="#F5E080" opacity="0.7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="reveal">
+        <p>「むすひ」は、古来より伝わる言葉——<br>生成・結合・創造の力を意味します。</p>
+        <div style="text-align:center;margin:1.4rem 0">
+          <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
+            <line x1="5" y1="10" x2="38" y2="10" stroke="#DEB8D0" stroke-width="0.7" opacity="0.7"/>
+            <circle cx="50" cy="10" r="4" fill="none" stroke="#E8C060" stroke-width="0.7"/>
+            <circle cx="50" cy="10" r="1.8" fill="#E8C060" opacity="0.8"/>
+            <line x1="62" y1="10" x2="95" y2="10" stroke="#DEB8D0" stroke-width="0.7" opacity="0.7"/>
+            <line x1="50" y1="2" x2="50" y2="6" stroke="#E8C060" stroke-width="0.6" opacity="0.6"/>
+            <line x1="50" y1="14" x2="50" y2="18" stroke="#E8C060" stroke-width="0.6" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="profile-text" style="text-align:center;line-height:3">
+          <p>かつて私は、どこか<br>「ここは自分の居場所ではない、これは私ではない」<br>と感じながら<br>「いつか本来の自分を生きるための今」を生きていました。</p>
+          <p>不安定な中で<br>息を止めるように耐え、限界が来るとそこから離れる——<br>そんな状態を繰り返していました。<br>変わるきっかけを外側に求め<br>ただ待ち続けていたのだと思います。</p>
+          <p>変化が起きたのは<br>自分の内側にある感覚に目を向け始め<br>自分を信頼できるようになってきた頃からでした。</p>
+        </div>
+        <div class="profile-divider" style="text-align:center">
+          <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
+            <line x1="5" y1="10" x2="38" y2="10" stroke="#DEB8D0" stroke-width="0.7" opacity="0.7"/>
+            <circle cx="50" cy="10" r="4" fill="none" stroke="#E8C060" stroke-width="0.7"/>
+            <circle cx="50" cy="10" r="1.8" fill="#E8C060" opacity="0.8"/>
+            <line x1="62" y1="10" x2="95" y2="10" stroke="#DEB8D0" stroke-width="0.7" opacity="0.7"/>
+            <line x1="50" y1="2" x2="50" y2="6" stroke="#E8C060" stroke-width="0.6" opacity="0.6"/>
+            <line x1="50" y1="14" x2="50" y2="18" stroke="#E8C060" stroke-width="0.6" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="profile-text">
+          <p>BodyTalkセッションと長年にわたる直感的リーディングの実践を統合した形でセッションをお届けしています。</p>
+          <br>
+          <p>答えを"受け取る"のではなく<br>自分で見出し、それを自分自身のものとして生きていただくことを大切にしています。<br>言葉を通して在り方が響き合う場の中で<br>何かが整っていく感じ、静かに目を覚ましていく感覚——<br>そうした感覚とともに<br>あなたが、あなたご自身とつながり直していく時間となることを願っています。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="services-bg" id="services">
+  <div class="services-inner">
+    <div class="reveal">
+      <span class="section-label">services</span>
+      <h2 class="section-title">セッションについて</h2>
+    </div>
+
+    <!-- こんな方に向いています -->
+    <div class="suited-box reveal">
+      <div class="suited-title">自分の内側と向き合うことを選んでいる方へ</div>
+      <ul class="suited-list">
+        <li>言葉にしきれていない何かを感じている</li>
+        <li>同じパターンを何度も繰り返している感覚がある</li>
+        <li>癒しを消費すること、癒しやノウハウを重ねることに違和感を感じている</li>
+        <li>自分の内側の声をもっと聞けるようになりたい</li>
+        <li>答えや正しさより、自分の感覚を信頼していきたい</li>
+        <li>一時的な変化ではなく、本質的な変容を望んでいる</li>
+        <li>静かでも確かな変化を受け取る準備がある</li>
+      </ul>
+      <p style="margin-top:1.4rem;font-size:.84rem;color:var(--purple);font-weight:300;letter-spacing:.06em">このような方に向いています。</p>
+      <div class="suited-note">
+        答えを明確に受け取りたい方や、短期間での変化を期待している方には、向いていないかもしれません。
+      </div>
+    </div>
+
+    <!-- セッションの流れ -->
+    <div class="flow-box reveal">
+      <div class="flow-title">セッションの流れ</div>
+      <ol class="flow-list">
+        <li>フォームよりお申し込み</li>
+        <li>受付確認メールのお受け取り</li>
+        <li>お振込み</li>
+        <li>お悩みや気になっていることをメールにてお送りください</li>
+        <li>セッション結果をメールにてお届けします</li>
+      </ol>
+      <div class="flow-note">
+        ※ セッションは事前のお振込み確認後にお届けします。お振込は受付確認メールのお受取り後7日以内にお願いいたします。<br>
+        ※ お振込が確認できない場合は、キャンセル扱いとさせていただきます。
+      </div>
+    </div>
+
+    <div class="confirm-notice reveal">
+      お申し込みをいただいた後、3日以内に受付確認メールをお送りします。<br>
+      確認メールが届かない場合は、お問い合わせください。
+    </div>
+
+    <!-- セッションカード -->
+    <div class="cards">
+      <!-- カード1 -->
+      <div class="card-wrap reveal">
+        <div class="card card-accordion" onclick="toggleCard(this)">
+          <div class="card-ring"></div><div class="card-ring-2"></div><div class="card-glow"></div>
+          <span class="card-icon">✦</span>
+          <div class="card-title">リーディングメール</div>
+          <div class="card-price">¥5,500 / 回<br><small style="font-size:.8rem;color:var(--mauve)">3回セット ¥15,000</small></div>
+          <div class="card-hint">詳しく見る ∨</div>
+        </div>
+        <div class="card-detail">
+          <p>今感じていること、繰り返し浮かんでくること、言葉にしきれていないことを自由に書いてお送りください。</p>
+          <p style="margin-top:1.2rem">あなたの内側にある流れを読み解きながら、捉えきれなかった感覚や言葉以前の、内容の背景にあるものを文章にしてお返しします。それによって「本当はどうしたいのか」「どこに向かおうとしているのか」が自然と見えてくることがあります。</p>
+          <p style="margin-top:1.2rem">答えを受け取るというより、すでに自分の中にあったものに気づいていくプロセスです。</p>
+          <p style="margin-top:1.2rem">3回セットは、ひとめぐりとして設計しています。1回目で何かが開き、2回目で広く見渡し、3回目で自分の言葉が出てくる——そのような流れが生まれやすいセットです。</p>
+          <p style="margin-top:1.2rem;font-size:.78rem;color:var(--mauve)">※ 3回セットの有効期限はお申し込みから3ヶ月とさせていただきます。</p>
+          <div class="detail-price">
+            <span>1回　¥5,500</span>
+            <span>3回セット　¥15,000</span>
+          </div>
+          <p style="margin-top:1rem;font-size:.78rem;color:var(--mauve)">はじめての方やご自分のペースで必要なときに受けたい方は単発のセッションを、ひとつのテーマをまとまりとして見ていきたい感覚がある方は3回セットをお選びください。</p>
+          <a href="https://forms.gle/q15x7pD6ZqRZYySV7" target="_blank" class="detail-btn">このセッションに申し込む →</a>
+        </div>
+      </div>
+
+      <!-- カード2 -->
+      <div class="card-wrap reveal">
+        <div class="card card-accordion" onclick="toggleCard(this)">
+          <div class="card-ring"></div><div class="card-ring-2"></div><div class="card-glow"></div>
+          <span class="card-icon">◈</span>
+          <div class="card-title">BodyTalk統合<br>リーディングメール</div>
+          <div class="card-price">¥15,000 / 回</div>
+          <div class="card-hint">詳しく見る ∨</div>
+        </div>
+        <div class="card-detail">
+          <p>繰り返してしまうパターンや、理由は分からないけれど止まってしまう感覚、頭では理解しているのに変われない状態——そうした部分に、BodyTalkは働きかけます。</p>
+          <p style="margin-top:1.2rem">BodyTalkは、潜在意識が持っている解決の像を観察することで変化を起こしていく技法です。「見ること」そのものが変化の引き金になるという原理に基づいています。</p>
+          <p style="margin-top:1.2rem">何が起きているかよりも、何が動こうとしているかに焦点を当て、内側から自然に変化が起こる場を整えていきます。表面的な理解にとどまらず、在り方そのものが静かに変わっていくプロセスです。セッションにはリーディングの要素も統合されており、変化が言葉を伴って届くようになっています。</p>
+          <div class="detail-price">
+            <span>1回　¥15,000</span>
+          </div>
+          <a href="https://forms.gle/q15x7pD6ZqRZYySV7" target="_blank" class="detail-btn">このセッションに申し込む →</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- キャンセルポリシー・同意事項 アコーディオン -->
+    <div class="policy-box reveal">
+      <button class="policy-accordion-btn" onclick="togglePolicy(this)">
+        キャンセルポリシー
+        <span class="policy-arrow">∨</span>
+      </button>
+      <div class="policy-content">
+        <div class="policy-inner">
+          <p>お申し込み後、セッションのためのメール（お悩みの内容など）をお送りいただく前であればキャンセルを承ります。その場合、振込手数料を差し引いた金額をご返金いたします。</p>
+          <p>セッションメールをお送りいただいた後のキャンセル・ご返金はお受けできません。</p>
+          <p>3回セットの途中でキャンセルされる場合は、お受けいただいた回数分（1回¥5,500）と振込手数料を差し引いた残額をご返金いたします。</p>
+          <p>3回セットの有効期限はお申し込みから3ヶ月とさせていただきます。</p>
+          <p>お振込が確認できない場合や、受付確認メールのお受取り後7日を過ぎてご返信がない場合はキャンセル扱いとさせていただきます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="policy-box reveal">
+      <button class="policy-accordion-btn" onclick="togglePolicy(this)">
+        ご確認とご同意事項
+        <span class="policy-arrow">∨</span>
+      </button>
+      <div class="policy-content">
+        <div class="policy-inner">
+          <p>本セッションはBodyTalkおよび直感的リーディングを用いたエネルギー的・情報的なアプローチです。医療行為ではなく、診断・治療・処方を目的とするものではありません。また、トラウマ処理を目的とした心理療法ではなく、過去の傷つき体験を直接扱うことはしません。</p>
+          <p>セッションによって特定の変化や効果を保証するものではありません。変化の現れ方や時期には個人差があります。</p>
+          <p>現在、医療機関へ通院されている方や精神科・心療内科等で治療を受けられている方は、主治医の指示を優先してください。本セッションは医療の代替となるものではありません。</p>
+          <p>お伝えいただいた内容およびメールアドレス等の個人情報は、セッションの実施およびご連絡の目的以外に使用することはありません。第三者への提供も行いません。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="contact-bg" id="contact">
+  <div class="contact-inner reveal">
+    <span class="section-label">contact</span>
+    <div class="contact-frame">
+      <div class="corner corner-tl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#E8C060" stroke-width="0.8" opacity="0.6"/><circle cx="20" cy="2" r="1.5" fill="#E8C060" opacity="0.5"/><circle cx="2" cy="20" r="1.5" fill="#E8C060" opacity="0.5"/></svg></div>
+      <div class="corner corner-tr"><svg viewBox="0 0 40 40" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#E8C060" stroke-width="0.8" opacity="0.6"/><circle cx="20" cy="2" r="1.5" fill="#E8C060" opacity="0.5"/><circle cx="2" cy="20" r="1.5" fill="#E8C060" opacity="0.5"/></svg></div>
+      <div class="corner corner-bl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#E8C060" stroke-width="0.8" opacity="0.6"/><circle cx="20" cy="2" r="1.5" fill="#E8C060" opacity="0.5"/><circle cx="2" cy="20" r="1.5" fill="#E8C060" opacity="0.5"/></svg></div>
+      <div class="corner corner-br"><svg viewBox="0 0 40 40" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#E8C060" stroke-width="0.8" opacity="0.6"/><circle cx="20" cy="2" r="1.5" fill="#E8C060" opacity="0.5"/><circle cx="2" cy="20" r="1.5" fill="#E8C060" opacity="0.5"/></svg></div>
+      <h2 class="section-title" style="color:var(--purple)">お問い合わせ</h2>
+      <p>どうぞお気軽にご連絡ください。</p>
+      <a href="mailto:musuhi69heart.healing@gmail.com" class="contact-btn">お問い合わせはこちら</a>
+      <br>
+      <a href="https://note.com/dapper_camel8824/portal" target="_blank" class="note-link">note で記事を読む →</a>
+    </div>
+  </div>
+</div>
+
+<footer><p>&copy; 2025 &nbsp;むすひ &nbsp;heart healing studio</p></footer>
+
+<script>
+function toggleCard(cardEl) {
+  var wrap = cardEl.parentElement;
+  var detail = wrap.querySelector('.card-detail');
+  var isOpen = cardEl.classList.contains('open');
+  document.querySelectorAll('.card-accordion.open').forEach(function(c){
+    c.classList.remove('open');
+    c.parentElement.querySelector('.card-detail').classList.remove('open');
+    c.querySelector('.card-hint').textContent = '詳しく見る ∨';
+  });
+  if (!isOpen) {
+    cardEl.classList.add('open');
+    detail.classList.add('open');
+    cardEl.querySelector('.card-hint').textContent = '閉じる ∧';
+  }
+}
+
+function togglePolicy(btn) {
+  var content = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  content.classList.toggle('open', !isOpen);
+}
+
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  els.forEach(function(el){ el.classList.add('visible'); });
+  if('IntersectionObserver' in window){
+    els.forEach(function(el){ el.classList.remove('visible'); });
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e,i){
+        if(e.isIntersecting){
+          setTimeout(function(){ e.target.classList.add('visible'); }, i*90);
+          obs.unobserve(e.target);
+        }
+      });
+    },{threshold:0.05});
+    els.forEach(function(el){ obs.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
