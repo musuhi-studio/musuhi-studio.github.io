@@ -106,6 +106,13 @@
     .policy-inner p:last-child{margin-bottom:0}
     .policy-section-title{font-size:.8rem;color:var(--purple);letter-spacing:.1em;font-weight:400;margin-top:1.2rem;margin-bottom:.4rem}
     .services-note{text-align:center;margin-top:2.5rem;font-size:.82rem;color:var(--mauve);font-weight:300;letter-spacing:.06em}
+    .trial-band{margin-top:2.8rem;padding:1.6rem 2rem;border-top:1px dashed rgba(232,192,96,.35);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.2rem}
+    .trial-text{font-size:.8rem;color:var(--mauve);letter-spacing:.06em;line-height:2;font-weight:300}
+    .trial-text span{display:block;font-family:'Zen Antique Soft',serif;font-size:.85rem;color:var(--purple);margin-bottom:.4rem;letter-spacing:.1em}
+    .trial-links{display:flex;flex-direction:column;gap:.6rem;width:100%}
+    .trial-link{font-size:.72rem;color:var(--mauve);letter-spacing:0;text-decoration:none;padding:.7rem 1rem;border:1px solid rgba(166,127,160,.35);border-radius:20px;transition:all .3s;white-space:normal;text-align:center;display:block;width:100%;box-sizing:border-box;line-height:1.7}
+    .trial-link:hover{color:var(--rose);border-color:rgba(192,72,112,.4);background:rgba(255,255,255,.4)}
+    @media(min-width:640px){.trial-links{width:auto}.trial-link{white-space:nowrap;width:auto;font-size:.75rem;letter-spacing:.06em}}
     .confirm-notice{text-align:center;margin-top:1.5rem;font-size:.78rem;color:var(--mauve);font-weight:300;letter-spacing:.06em;line-height:2}
     .contact-bg{background:linear-gradient(160deg,#FAF0F7 0%,#F5E8F5 50%,#EEE0F0 100%);padding:7rem 2rem;text-align:center;position:relative;overflow:hidden}
     .contact-bg::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(245,224,160,.25) 0%,transparent 65%);pointer-events:none}
@@ -419,6 +426,17 @@
       </div>
     </div>
 
+    <!-- 体験セッション帯 -->
+    <div class="trial-band reveal">
+      <div class="trial-text">
+        <span>体験セッションについて</span>
+        本セッションの体験版をNoteの有料記事内でご案内しています。
+      </div>
+      <div class="trial-links">
+        <a href="https://note.com/dapper_camel8824/n/n2e0f4e6b35a1" target="_blank" class="trial-link">リーディングメール体験セッション →</a>
+        <a href="https://note.com/dapper_camel8824/n/n4f26a124f3c2" target="_blank" class="trial-link">BodyTalk統合リーディングメール体験セッション →</a>
+      </div>
+    </div>
 
     <!-- キャンセルポリシー・同意事項 アコーディオン -->
     <div class="policy-box reveal">
